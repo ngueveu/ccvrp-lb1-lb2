@@ -1,0 +1,104 @@
+# Makefile for the LB computations for ccvrp
+
+# paths to include
+INCLUDES_PATH= \
+	-Isrc
+
+# libraries to use
+LIBSdebug= \
+	-lm 
+
+LIBSrelease= \
+	-lm 
+
+# paths to libraries
+LIBS_PATH= \
+	-Llib
+
+# The compiler
+COMPILO=gcc
+
+
+# Options for compilation of source files
+
+FLAGSdebug=  -fPIC -fexceptions -DNDEBUG -Wfatal-errors -DIL_STD -g
+
+FLAGSrelease= -DIL_STD -O3
+
+# List of objects
+OBJdebug= src/CCVRP_Procedures_Main-debug.o \
+	src/CCVRP_LowerBounds-debug.o \
+	src/CCVRP_Main-debug.o 
+
+OBJrelease= src/CCVRP_Procedures_Main-release.o \
+	src/CCVRP_LowerBounds-release.o \
+	src/CCVRP_Main-release.o
+
+# to create the executable files
+EXEC_NAMEdebug = exe/CCVRP-LB-debug.exe
+OBJdebugo= $(OBJdebug)
+
+EXEC_NAMErelease = exe/CCVRP-LB-release.exe
+OBJreleaseo= $(OBJrelease)
+
+
+######################
+#                    #
+#    Main Targets    #
+#                    #
+######################
+
+all : $(EXEC_NAMErelease) $(EXEC_NAMEdebug)
+
+debug : $(EXEC_NAMEdebug)
+
+release : $(EXEC_NAMErelease)
+
+# Check that of all .o files exists and are up-to-date
+# otherwise, recompile and relink
+
+$(EXEC_NAMEdebug) : $(OBJdebug)
+	$(COMPILO) -o $(EXEC_NAMEdebug) $(OBJdebug) $(LIBS_PATH) $(LIBSdebug)
+
+$(EXEC_NAMErelease) : $(OBJrelease)
+	$(COMPILO) -o $(EXEC_NAMErelease) $(OBJrelease) $(LIBS_PATH) $(LIBSrelease)
+
+# Typing 'make clean' allows to delete all .o files
+clean : 
+	rm src/*.o 
+
+clean-debug : 
+	rm -rf src/*-debug.o
+
+clean-release : 
+	rm -rf src/*-release.o
+	rm $(OBJrelease)
+ 
+# Typing 'make clear' does a 'make clean', then removes the executable file.
+clear : 
+	make clean;
+	rm -f *~ src/*~ exe/~;
+	rm exe/*.exe;
+	rm -f -r html
+
+
+###########################
+#                         #
+#   sources compilation   #
+#                         #
+###########################
+
+%-debug.o: %.c
+	$(COMPILO) $(FLAGSdebug) $(INCLUDES_PATH) -o $@ -c $<
+
+%-release.o: %.c
+	$(COMPILO) $(FLAGSrelease) $(INCLUDES_PATH) -o $@ -c $<
+
+
+
+# Create a Doxygen documentation and the configuration file 'doxygen_config'
+#doc :
+#	doxygen DoxygenOutput/doxygen_config
+
+#clearDoc :
+#	rm -f -r html

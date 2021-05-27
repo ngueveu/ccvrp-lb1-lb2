@@ -1,0 +1,16 @@
+
+make -f exe/makefile.txt
+make clean -f exe/makefile.txt
+
+clear
+
+
+exe/CCVRP-LB-debug.exe data/TRP-S10-R1.txt.ccvrp exe/paramtrp_0.txt
+
+exe/CCVRP-LB-debug.exe data/vrpnc1.txt exe/param_0.txt
+exe/CCVRP-LB-debug.exe data/vrpnc2.txt exe/param_0.txt
+exe/CCVRP-LB-debug.exe data/vrpnc3.txt exe/param_0.txt
+exe/CCVRP-LB-debug.exe data/vrpnc4.txt exe/param_0.txt
+exe/CCVRP-LB-debug.exe data/vrpnc5.txt exe/param_1.txt
+exe/CCVRP-LB-debug.exe data/vrpnc11.txt exe/param_0.txt
+exe/CCVRP-LB-debug.exe data/vrpnc12.txt exe/param_0.txt

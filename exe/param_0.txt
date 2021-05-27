@@ -1,0 +1,38 @@
+/*
+	MEMETIC ALGORITHM FOR THE CUMULATIVE CAPACITATED VRP (CCVRP)
+	Sandra Ulrich Ngueveu, Roberto Wolfler Calvo, Christian Prins
+
+	- Parameters for LB 
+	(except for VRPNC5 which requires one additional vehicle in 'NBER_OF_ROUTES_MORE_THAN_MIN')
+*/
+
+// Last update: 24072008
+
+// All parameters must be integer
+
+/////////////////////////////////////////////////////
+/////						/////
+/////		GENERAL PARAMETERS		/////
+/////						/////
+/////////////////////////////////////////////////////
+
+TYPE_FORMAT_SOURCE_FILE 2
+// value 1: the source file loaded is of type "Augerat et al" file formats, also used by ".ccvrp" files obtained from the conversion of TRP files
+// value 2: the source file loaded is of type "vrpnc" from Christofides & Mingozzi
+// value 3: the source file loaded is of type "fri26.txt" which ressembles "Augerat et al.", but
+// the 'EDGE_WEIGHT_SECTION' is the diagonal low part of a cost matrix, and no Demand
+
+
+NBER_OF_ROUTES_MORE_THAN_Rbound 0
+The maximum number of routes R will be computed as : "R = Rbound + NBER_OF_ROUTES_MORE_THAN_Rbound"
+where Rbound = \ceil(TotalLOAD / CAPACITY)
+
+
+IMPRIMER_PROGRES 0
+// value 0: no print
+// value 1: print file DataCP
+// value 2: print all
+
+
+
+
